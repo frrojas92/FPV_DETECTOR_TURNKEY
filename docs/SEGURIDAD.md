@@ -1,0 +1,9 @@
+# Seguridad, privacidad y limitaciones operativas
+
+- `fpv_web_v4.py` sirve HTTP **sin contraseña**, solicitado expresamente para acceso inmediato. Enlaza a 0.0.0.0:8765; restringir por VLAN/LAN y firewall; jamás exponer a Internet. Cualquier cliente de esa LAN puede presionar controles que afecten el detector.
+- TAK usa PKCS#12 client/CA, TLS 1.2+ y verificación estricta. No aceptar el servidor mediante `verify=False` ni desactivar validación de nombre. `--legacy` solo activa compatibilidad de cifrado al **importar** PKCS#12 antiguo con OpenSSL3.
+- Los SoftCert ZIP pueden almacenar contraseñas en `config.pref`. No copiarlo a GitHub, tickets, logs o repositorios. `tak_certs/` y `fpv_tak_config.json` deben permanecer en dispositivo con permisos 0700 y 0600. Rotar credenciales si se han expuesto.
+- Posición del sensor: coordenadas GNSS o estáticas configuradas explícitamente; nunca valor falso de reemplazo ni estimación de distancia por RSSI. RF persistente no identifica automáticamente una aeronave ni afiliación. El icono OTAN hostil es una **hipótesis visual** y porta metadatos de baja confianza.
+- La señal volátil CoT se renueva cada 3 s y caduca 12 s después de la última renovación cuando falla conexión o energía. Con sesión TLS activa, `systemctl stop` intenta enviar CoT de expiración inmediata. NO se puede borrar inmediatamente un marcador ya entregado a otro cliente cuando no hay red. El servidor/cliente puede mantener historial de eventos; GeoChat se desactiva porque no es volátil.
+- El HackRF es sensible a potencia excesiva en su entrada; no conectar una salida de transmisor directamente a RF IN. El proyecto es de recepción pasiva y no transmite señales deliberadamente.
+- El TUI IPv4 prepara cambios diferidos mediante NetworkManager si existe. Planificar fuera de sesión crítica: una configuración IP incorrecta puede bloquear SSH.

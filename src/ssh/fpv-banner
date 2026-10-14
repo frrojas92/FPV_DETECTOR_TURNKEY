@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Managed by FPV_SSH_UI_V1
+# Read-only telemetry for SSH login. Does not start/stop services.
+set -u
+
+if [[ -t 1 && "${TERM:-dumb}" != dumb && -z "${NO_COLOR:-}" ]]; then
+  BLUE=$'\033[1;34m'; CYAN=$'\033[1;36m'; GREEN=$'\033[1;32m'
+  YELLOW=$'\033[1;33m'; RED=$'\033[1;31m'; DIM=$'\033[2m'; RESET=$'\033[0m'
+else
+  BLUE=''; CYAN=''; GREEN=''; YELLOW=''; RED=''; DIM=''; RESET=''
+fi
+
+service_state='DETENIDO'; service_color="$RED"
+case "$(systemctl is-active detector-fpv.service 2>/dev/null || :)" in
+  active) service_state='ACTIVO'; service_color="$GREEN" ;;
+  activating) service_state='INICIANDO'; service_color="$YELLOW" ;;
+  *) service_state='DETENIDO'; service_color="$RED" ;;
+esac
+
+if command -v tmux >/dev/null 2>&1 && tmux -L fpv_v19e has-session -t detector >/dev/null 2>&1; then
+  tui_state='DISPONIBLE'; tui_color="$GREEN"
+else
+  tui_state='ESPERANDO'; tui_color="$YELLOW"
+fi
+
+hackrf_state='NO DETECTADO'; hackrf_color="$YELLOW"
+for usb in /sys/bus/usb/devices/*; do
+  [[ -r "$usb/idVendor" && -r "$usb/idProduct" ]] || continue
+  IFS= read -r vendor < "$usb/idVendor" || :
+  IFS= read -r product < "$usb/idProduct" || :
+  if [[ "${vendor,,}:${product,,}" == '1d50:6089' ]]; then
+    hackrf_state='USB PRESENTE'; hackrf_color="$GREEN"; break
+  fi
+done
+
+if [[ -e /dev/spidev0.1 ]]; then
+  spi_state='SPI LISTO'; spi_color="$GREEN"
+else
+  spi_state='SIN SPI CE1'; spi_color="$YELLOW"
+fi
+
+audio_state='NO DETECTADO'; audio_color="$YELLOW"
+if [[ -r /proc/asound/cards ]] && grep -Eqi 'KT USB Audio|USB-Audio|USB Audio' /proc/asound/cards; then
+  audio_state='USB PRESENTE'; audio_color="$GREEN"
+fi
+
+temp='N/D'
+if [[ -r /sys/class/thermal/thermal_zone0/temp ]]; then
+  IFS= read -r temp_milli < /sys/class/thermal/thermal_zone0/temp || :
+  if [[ "${temp_milli:-}" =~ ^[0-9]+$ ]]; then
+    temp="$(awk -v t="$temp_milli" 'BEGIN{printf "%.1f C",t/1000}')"
+    if (( temp_milli >= 80000 )); then temp="${RED}${temp}${RESET}  [ALTA]"; fi
+  fi
+fi
+
+printf '\n%b\n' "${CYAN}  ╔════════════════════════════════════════════════════════════╗${RESET}"
+printf '%b\n' "${CYAN}  ║${RESET} ${BLUE}FPV DETECTOR${RESET}    /    MONITOREO RF 5.8 GHz               ${CYAN}║${RESET}"
+printf '%b\n' "${CYAN}  ║${RESET} RASPBERRY PI 5  +  HACKRF ONE  |  V19-E RAMTEST        ${CYAN}║${RESET}"
+printf '%b\n' "${CYAN}  ╚════════════════════════════════════════════════════════════╝${RESET}"
+printf '\n'
+printf '  %-15s %b\n' 'DETECTOR' "${service_color}${service_state}${RESET}"
+printf '  %-15s %b\n' 'TUI / TMUX' "${tui_color}${tui_state}${RESET}"
+printf '  %-15s %b\n' 'HACKRF ONE' "${hackrf_color}${hackrf_state}${RESET}"
+printf '  %-15s %b\n' 'TFT / TACTIL' "${spi_color}${spi_state}${RESET}"
+printf '  %-15s %b\n' 'AUDIO' "${audio_color}${audio_state}${RESET}"
+printf '  %-15s %b\n' 'TEMP. CPU' "$temp"
+printf '\n%b\n' "${DIM}  ────────────────────────────────────────────────────────────${RESET}"
+printf '  %b%-15s%b %s\n' "$GREEN" 'fpv' "$RESET" 'Entrar a la TUI activa (SCAN / VIDEO)'
+printf '  %-15s %s\n' 'Ctrl+B, D' 'Desconectarse sin detener el detector'
+printf '  %-15s %s\n' 'fpv-banner' 'Mostrar nuevamente el estado del sistema'
+printf '%b\n\n' "${DIM}  Monitor RF: una señal detectada no confirma un dron.${RESET}"

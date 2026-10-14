@@ -1,0 +1,35 @@
+# Private state, TAK identities and keys
+**/tak_certs/
+**/fpv_tak_config.json
+**/*Cert.p12
+*.p12
+*.pfx
+*.key
+*.pref
+*Auto_Cert*.zip
+**/.fpv_web_auth
+**/fpv_touch_calibration.json
+**/.asoundrc
+**/.venv*/
+**/__pycache__/
+**/*.pyc
+**/logs/
+**/backups*/
+**/capturas_privadas/
+reference/private/
+reference/pip-freeze-venv-tft.txt
+reference/audio-private.json
+reference/systemd-private.txt
+reference/machine-private.json
+**/build/
+**/build-*/
+**/*.cs8
+**/*.raw
+**/*.log
+**/*.wav
+!assets/warning.wav
+.DS_Store
+
+# Turnkey development backups
+*.backup-*
+*.backup-fase*

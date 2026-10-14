@@ -1,0 +1,19 @@
+[Unit]
+Description=FPV V19-E FPS30 SPI24MHz - tmux
+Wants=fpv-boot-splash.service fpv-usb-volume.service
+After=fpv-boot-splash.service fpv-usb-volume.service local-fs.target
+RequiresMountsFor=/home/cetel/detector_drone
+
+[Service]
+Type=simple
+User=cetel
+WorkingDirectory=/home/cetel/detector_drone
+Environment=HOME=/home/cetel
+Environment=TERM=xterm-256color
+ExecStart=/usr/local/bin/fpv19e-tmux-supervisor
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

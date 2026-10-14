@@ -1,0 +1,8 @@
+{
+  "source_tree": "v19e_fps30_experimental",
+  "source_sha256": "40585935faa7966dd3bcfaefdeec20cd8aa34c2a2fae4b4afd7d7a286be39479",
+  "source_license": "vendor/fpvdec/LICENSE",
+  "tft_installed_sha256": "59d6db1f2efb3c6111c3c8557b4971a7a613a7921b48451771f6aaeb97b444c1",
+  "decoder_binary_sha256": "b9edb7ba8c13517506364129d17c5f86e336171296c05cef396dd0bc63a3690a",
+  "pi_python": "Python 3.13.5"
+}

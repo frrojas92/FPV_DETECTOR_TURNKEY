@@ -1,0 +1,505 @@
+{
+  "release": "v1.0.0-rc1",
+  "created": "2026-10-14",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "26fa879a4479273e728d4436f0686935389378da7b6a648941ea7c0800f13839",
+      "size": 395
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "2240b9e0f5b7a3a84c38272dfc9964ac7463758510c86cd545f4d3db2e27b8e6",
+      "size": 560
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "bb3beb6f3f68e3370015d469740d7c3fc81d8e6f0c2ea49f34bf6a2cdc9e81b0",
+      "size": 5879
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "d1dc84f337b1d19a3a43a7b128c5aa851dd6a72a633c166e8527f83b660f63da",
+      "size": 1049
+    },
+    {
+      "path": "README.md",
+      "sha256": "314ad76d39ec55eff120683d06b14866327aea7d60326dade5fbb71759eac229",
+      "size": 5613
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "sha256": "9576280cdaaeeaa7a2dfd40b1dc12570a8e5f45b8b0120766389cc091799ae8d",
+      "size": 914
+    },
+    {
+      "path": "VERSION",
+      "sha256": "cb0e21997584396758e3f97c1732a9551342f04273632e57217b7359149b6e2f",
+      "size": 122
+    },
+    {
+      "path": "assets/warning.wav",
+      "sha256": "7fca191da01c71ec9ef0eee4bb5140f50af50195addabf69fe51118fc7c1b177",
+      "size": 36328
+    },
+    {
+      "path": "docs/ARQUITECTURA.md",
+      "sha256": "2f2621f1ace72f7e49f0f9aa11862c13b1569e7803fe63aadda6f07ec25007bc",
+      "size": 2685
+    },
+    {
+      "path": "docs/INSTALACION.md",
+      "sha256": "4529d751d3eb737a6688a846f4fffcdf697339f658c62740dec58d72e23b52c4",
+      "size": 4894
+    },
+    {
+      "path": "docs/REPRODUCIBILIDAD.md",
+      "sha256": "7f96edbff9b9c6ab3b81ca0d743d5e6212199883e76ed04940ce01bc27918b09",
+      "size": 3980
+    },
+    {
+      "path": "docs/SEGURIDAD.md",
+      "sha256": "daa4cd20d4e71818c8a7e144750332680bf51cc339fd76f50d409ce1b1fcc1f2",
+      "size": 1895
+    },
+    {
+      "path": "docs/VERIFICACION.md",
+      "sha256": "498064541497ca942e92b685e93322272d1f26162eac7ecea4094e16e4b68ae0",
+      "size": 2176
+    },
+    {
+      "path": "instalar.sh",
+      "sha256": "a1528c87fea336ba9e20023f515e9b32ba4c72f764a8c595edc15f745d93e0ea",
+      "size": 547
+    },
+    {
+      "path": "reference/apt-versions.txt",
+      "sha256": "4c47850182c01880a3ad907549ee261c6dd5e9f889e01ef24e3b947e089e8985",
+      "size": 62357
+    },
+    {
+      "path": "reference/reference-manifest.json",
+      "sha256": "c95d4f8cea4db8eefa77f1f23d108c1413c4ac49b2f897bbf8f007afb83487ef",
+      "size": 400
+    },
+    {
+      "path": "reference/requirements-venv.txt",
+      "sha256": "3b06ce215d97bd5988480c14f377a77896d5631c3f237666dced4af08ae8c6d0",
+      "size": 442
+    },
+    {
+      "path": "reference/requirements.lock.txt",
+      "sha256": "66610291905209cb345bedd176c5cdf8375a34a366c495465e06618d1eb2ee35",
+      "size": 6767
+    },
+    {
+      "path": "reference/runtime_hashes.json",
+      "sha256": "ac7aeacb1be9c0b90ff9bc8c55625d4cf86a95188ad46a415632d9d35b361b7e",
+      "size": 3842
+    },
+    {
+      "path": "scripts/activacion_systemd.py",
+      "sha256": "3eddd781eba8daa139c1abd7ed81dd5613cdfebca21d67520e9edebe0c96af32",
+      "size": 13392
+    },
+    {
+      "path": "scripts/capturar_referencia.sh",
+      "sha256": "94a8e79a5747ac042509b1ad209d5539866cdf87048ecf5fc1790d590773bda5",
+      "size": 4125
+    },
+    {
+      "path": "scripts/comparar_instalado.py",
+      "sha256": "404f94255432ef634f36466209daf3898e833d60bb0d77a416ee40d5b1190dc8",
+      "size": 2179
+    },
+    {
+      "path": "scripts/compilar_fpvdec_portable.sh",
+      "sha256": "d695aec5e833e30cfc3ad1bff6d9fc9f76334e1c32fbeb034ccdc23f3d7d0052",
+      "size": 1645
+    },
+    {
+      "path": "scripts/dependencias_debian13.sh",
+      "sha256": "ace17b21471b43a45fa5e876ac5406e777e392a3d351e3684a2ad150684379f6",
+      "size": 872
+    },
+    {
+      "path": "scripts/generar_release.py",
+      "sha256": "22393e9bc97560b0faf1c4a260a46bcbafb76bad44da2cc6e2ce644a83f18581",
+      "size": 9200
+    },
+    {
+      "path": "scripts/instalar.py",
+      "sha256": "6e34300d73dd533858f7c409c433d48bf3c385c73afbe78095027bd9896c54c7",
+      "size": 15461
+    },
+    {
+      "path": "scripts/restaurar_servicios.sh",
+      "sha256": "e2ef35347ebca221e4dc879a15ae74e2c8c68c3400225f3e5ebc30ae98726bc4",
+      "size": 1697
+    },
+    {
+      "path": "scripts/transaccion.py",
+      "sha256": "16dfdce3063deba69542ac7c47c303caa0ed360a4b209d850e2b3a35bb68ff17",
+      "size": 7904
+    },
+    {
+      "path": "scripts/verificar.sh",
+      "sha256": "e81a748a318eb1e11370ce21e7a1afc6b17360de98791e2ee2eeffbfc9ff31e7",
+      "size": 1029
+    },
+    {
+      "path": "scripts/verificar_repo.py",
+      "sha256": "b712d6e8a36b4d6a0d0c2025ac725f37c75a8ff16efdeb8a7065038bce0a4c6e",
+      "size": 3249
+    },
+    {
+      "path": "src/audio/fpv-usb-volume.sh",
+      "sha256": "d10c418b941cecdff6b1cf876d887dcdab63860f4d4d05f89408b0320a231b5c",
+      "size": 889
+    },
+    {
+      "path": "src/detector/fpv58_detector19e.py",
+      "sha256": "f54ddbb734a4b5e8fd1d219e0f157da978a37e047017adab9b91cf6496ee5649",
+      "size": 79627
+    },
+    {
+      "path": "src/detector/fpv_color_transport_v182.py",
+      "sha256": "89c74dd0d781ff0a221d7fb0ab4b4aa31aacca99acf093a953748b19f0a4cb5a",
+      "size": 1530
+    },
+    {
+      "path": "src/detector/fpv_spectrum_v17.py",
+      "sha256": "da5b2c3885727e7e8fa5efbd8d955c045826f6778abcb1a3f2d4ab48a8f6731c",
+      "size": 3204
+    },
+    {
+      "path": "src/detector/fpv_video_transport_v181.py",
+      "sha256": "b2af08162969cef5e5502f0d1aae1d3d6563e01f54f7faa34f4944fb13d16353",
+      "size": 2202
+    },
+    {
+      "path": "src/detector/iniciar_detector_drone_v19e_consolidado.sh",
+      "sha256": "44d5cc3ceee97175a965eb21fff1627c5295b63abe47ab810a65eea203789364",
+      "size": 3248
+    },
+    {
+      "path": "src/detector/iniciar_detector_drone_v19e_ramtest.sh",
+      "sha256": "6353d289f47b185d352ed3af077b08d33d152c104e9f027fea025698e42fdf61",
+      "size": 2768
+    },
+    {
+      "path": "src/detector/spi_hz.txt",
+      "sha256": "23bd0d15d008c31ab636979be337a11499a8a05c558f47a2830ef087f0940db1",
+      "size": 9
+    },
+    {
+      "path": "src/splash/fpv_boot_splash_v3.py",
+      "sha256": "9c5f34c7a92f21dcc46d2eb69efd07e609866e22665ed10dc9bebd1c6dd5b233",
+      "size": 10837
+    },
+    {
+      "path": "src/ssh/90-fpv-ssh-ui.sh",
+      "sha256": "3067eae80ad8910c82c5381b15696d427368ad053e1bb95cbf39670a1cb4e024",
+      "size": 474
+    },
+    {
+      "path": "src/ssh/fpv",
+      "sha256": "04bf88d3ec745a01ce4aed41f237f2c424e26a33623d6a2c800d4f65d96c0c2d",
+      "size": 769
+    },
+    {
+      "path": "src/ssh/fpv-banner",
+      "sha256": "30b4cfd2c5ef35be3b1a2c65adc5edb448c69e9b3047fbfd57b410c984681f6c",
+      "size": 3614
+    },
+    {
+      "path": "src/tak/VERSION",
+      "sha256": "8c767dca9fd60e57a589b3b0f251af08d5c5a58f404b756bd833284f96432c06",
+      "size": 14
+    },
+    {
+      "path": "src/tak/cargar_softcert.py",
+      "sha256": "7805a240fbb3b89e30ad9a9116d71a535c918cfc364e2dfa2a2437b82d986a13",
+      "size": 11402
+    },
+    {
+      "path": "src/tak/config.example.json",
+      "sha256": "33b64d687caf37e9df7a842ae6cfe5bf846ebdb0a41927dfaa72dbd97d08cdde",
+      "size": 1060
+    },
+    {
+      "path": "src/tak/configurar.py",
+      "sha256": "1dedaa0d5784fa6d6b2506dbc566add7f1e5d06ff31a0c2e7955a5abd9c64c53",
+      "size": 3039
+    },
+    {
+      "path": "src/tak/configurar_posicion_v32.py",
+      "sha256": "8209c3c3708c8e25037b31b6dde6ce36afbf495d0c031a9c199c2ec9cf5e519d",
+      "size": 3933
+    },
+    {
+      "path": "src/tak/configurar_tls.py",
+      "sha256": "c489bcbd00f2b0eb118e99c5c1a024d0ee311209c24f5b80b3d667bbc5cac251",
+      "size": 2405
+    },
+    {
+      "path": "src/tak/fpv_tak_sensor.py",
+      "sha256": "d08899b8bf72c6354ee92b9d80ffdf4e710f65a1b7b419c16d95095e3e0e5b74",
+      "size": 31248
+    },
+    {
+      "path": "src/tak/fpv_tak_tui.py",
+      "sha256": "15ca4119935faf771c6bd9971c233e0f8628190368d10a1030f6f030eb9328c4",
+      "size": 15314
+    },
+    {
+      "path": "src/tak/importar_certificados.py",
+      "sha256": "925cde75f6677b45c5688e49932aee5810d4a3cf75e2a724e3833e9821182eef",
+      "size": 6880
+    },
+    {
+      "path": "src/tak/inspeccionar_zip.py",
+      "sha256": "fbbf79de9696b46e60c8fefce2ab0fd882ec572ee74c66f7e4a3556ebb60c385",
+      "size": 2926
+    },
+    {
+      "path": "src/tak/probar_tls.py",
+      "sha256": "8f3b5ff659e6ae8de21418cd424780fa7efd9607cb0cc1ad928ce50c2c765171",
+      "size": 958
+    },
+    {
+      "path": "src/tft/display_tft_v19e.py",
+      "sha256": "a210002dad555611ee10c3721867570cc0ae0449affeb6bdb8dca198ce557307",
+      "size": 51705
+    },
+    {
+      "path": "src/tft/display_tft_v19e_fps30.py",
+      "sha256": "59d6db1f2efb3c6111c3c8557b4971a7a613a7921b48451771f6aaeb97b444c1",
+      "size": 52051
+    },
+    {
+      "path": "src/web/fpv_web_v4.py",
+      "sha256": "0d6195a3c5d93a2fe4d145ed6b93804c56cae4bf3f3d7e71811c214f599670f4",
+      "size": 29573
+    },
+    {
+      "path": "systemd/detector-fpv.service",
+      "sha256": "8d3a360ace5f1f3de07a8572fd02b6f3095fbc83a62180eaa1ac89a5daf5e72d",
+      "size": 494
+    },
+    {
+      "path": "systemd/fpv-boot-splash.service",
+      "sha256": "ea5c403a068603c5497d869b41ce927ca3eba2e9ebe9da94bd4f6f9586874d7b",
+      "size": 450
+    },
+    {
+      "path": "systemd/fpv-tak-sensor.service",
+      "sha256": "f73fac5861ffabe6f74b6208dfa542cb7d7bc0893c67b6a4475422986af8e4e7",
+      "size": 529
+    },
+    {
+      "path": "systemd/fpv-usb-volume.service",
+      "sha256": "df2bc99117598442963ff1fe737aa006c0d9898c4fbf52dc993074846aef2fa5",
+      "size": 256
+    },
+    {
+      "path": "systemd/fpv-web-tft.service",
+      "sha256": "8b1ca04f8a0fb5a375ff406c70957111313ae899cc91041c186347fcd159ed2f",
+      "size": 679
+    },
+    {
+      "path": "systemd/fpv19e-tmux-supervisor.sh",
+      "sha256": "13283b61bd3ac0a7d18462d3f63c21a919945a9ad7a4e48f3214da181475eba5",
+      "size": 1123
+    },
+    {
+      "path": "tests/test_activacion_systemd.py",
+      "sha256": "76c7182843281bf140c707bec44a0c5ce374447bcd294479d39f5832c864fedd",
+      "size": 6403
+    },
+    {
+      "path": "tests/test_fpvdec_publicacion.py",
+      "sha256": "c6709d2c4daf91bd0a4508f1c06550bcca8812bba76eaf9056d53b7759e2ce31",
+      "size": 3028
+    },
+    {
+      "path": "tests/test_instalador_seguridad.py",
+      "sha256": "b6dcbf8b5a568b31637fe5280f1c1737c5bcfcc444ca4d67c573390511e984dd",
+      "size": 4537
+    },
+    {
+      "path": "tests/test_release_contract.py",
+      "sha256": "8bfb2887a060eee4c5aaa50eba69b5d81ef2c137472f6b755332f6d2741e7759",
+      "size": 1981
+    },
+    {
+      "path": "tests/test_tls.py",
+      "sha256": "c4659057058e570e9176893c81f53995b36b9beb07b74e0b8b4f693b4b931f04",
+      "size": 3193
+    },
+    {
+      "path": "tests/test_transaccion.py",
+      "sha256": "5c8659187dc3663403c618e08e20ebd9571bb485694083b7d2167a1b4e4979f7",
+      "size": 4159
+    },
+    {
+      "path": "tests/test_v32.py",
+      "sha256": "fda504067904e90fe41ef1d4f25ebcd724546336783c0b3e9723185f8d1d7d1e",
+      "size": 6679
+    },
+    {
+      "path": "tests/test_v33.py",
+      "sha256": "0b306db53f18cc6e514f6ffa99ef9fd64f801e9e0b73d612f4c557a739e97e8c",
+      "size": 2606
+    },
+    {
+      "path": "tests/test_v331.py",
+      "sha256": "eee869622e8fb176176011a934040dff64f3aaba5311959355315b2977eef844",
+      "size": 3317
+    },
+    {
+      "path": "vendor/fpvdec/.gitignore",
+      "sha256": "f4620825d7209e14c184efa08f8b522357f49f2fbcb342fd85cd756c37758f94",
+      "size": 63
+    },
+    {
+      "path": "vendor/fpvdec/CMakeLists.txt",
+      "sha256": "2e402948b536336caa0c0967f70d3532d8ef8e66295d660ccdfca21c625cbf39",
+      "size": 2677
+    },
+    {
+      "path": "vendor/fpvdec/LICENSE",
+      "sha256": "de39b2cc22d2c8ce1ed80ef0127555b6d8033aa7f05a32b1cd2a10464dc37b1f",
+      "size": 1064
+    },
+    {
+      "path": "vendor/fpvdec/README.ja.md",
+      "sha256": "a8c52b96db0a25950c3fe694c7fe2712075ea93c8fe6647bbc8d90f2b6b7697a",
+      "size": 8306
+    },
+    {
+      "path": "vendor/fpvdec/README.md",
+      "sha256": "203564f06f3e027d28042db3ee5eb7cf2c53cfbf64abeaf6eed7b9b02e169366",
+      "size": 7126
+    },
+    {
+      "path": "vendor/fpvdec/docs/IMG_9715.jpeg",
+      "sha256": "355661db498fc563a7f5a0d31efaee8071d524e012913acabd05dcadc5de6dcc",
+      "size": 2298674
+    },
+    {
+      "path": "vendor/fpvdec/src/config.hpp",
+      "sha256": "880dc8a61337d36e55c90a2a4c0e952497e60117ec4e0d34d4f5c61ea87ae0ad",
+      "size": 2967
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/agc.hpp",
+      "sha256": "f134d3ed5616b703c4c7aaa0e44cf157160c1233a53e6d1195e11e263e5b52c1",
+      "size": 3645
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/chroma.hpp",
+      "sha256": "27d544f26f1c7d8b8404c26f027659dc1abc540b7e7995b841152047ec18b181",
+      "size": 1206
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/dc_blocker.hpp",
+      "sha256": "a5ef4ad757a79136d9629048f6f2091778a8999c9bdc820dd5f75c9e6923a34f",
+      "size": 524
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/fir.hpp",
+      "sha256": "2cbad04facb794dcf66f3815101e825a064ea2f4639a3429a1517bf699231243",
+      "size": 5397
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/fm_detector.hpp",
+      "sha256": "2b44d53808f65c81ff044d72b56b6dff468dbf55be4fc8728e57bfc926844368",
+      "size": 4870
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/frame.hpp",
+      "sha256": "7983a33f6ae61c4a5121708146a5bffc460ecd73b9974827982834c826d07d0f",
+      "size": 1448
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/nco.hpp",
+      "sha256": "6506d47d2c4d2a9bee599272bd3c0f9a30870b0873db1604a74c961983a85e75",
+      "size": 1144
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/ntsc_decoder.cpp",
+      "sha256": "fe19d04cd6a1cd24cf5749c6622b3043c9d6f6a8adb383053a87b11fa42d9786",
+      "size": 20989
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/ntsc_decoder.hpp",
+      "sha256": "36c9a02efd8e76d3860fc811e93c3131fc3bfdd5fad1d89ea9df1f30f8c5ab44",
+      "size": 5086
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/ring_buffer.hpp",
+      "sha256": "01454aed1bb4765457d2727b84369d29144253223479acd60149c66d055052a3",
+      "size": 2011
+    },
+    {
+      "path": "vendor/fpvdec/src/dsp/sync.hpp",
+      "sha256": "70eaf80572ab48d8c3ff03c8e416b211de695d4b07a9d93b13aa30e81082ce2d",
+      "size": 1886
+    },
+    {
+      "path": "vendor/fpvdec/src/main.cpp",
+      "sha256": "40585935faa7966dd3bcfaefdeec20cd8aa34c2a2fae4b4afd7d7a286be39479",
+      "size": 37383
+    },
+    {
+      "path": "vendor/fpvdec/src/source/file_source.hpp",
+      "sha256": "bae17b44074eef71c163de3ff104dfb55b07eaa7aff4f91197c2b156818e45b5",
+      "size": 1945
+    },
+    {
+      "path": "vendor/fpvdec/src/source/hackrf_source.cpp",
+      "sha256": "618199508f1a5c991e34e2fc3d7929ae387bcf9dba273a9c2819d9f58af3c9eb",
+      "size": 4253
+    },
+    {
+      "path": "vendor/fpvdec/src/source/hackrf_source.hpp",
+      "sha256": "8a1ab5333cce5c41f92df95e3d3877d00d3a857de9d771dc77a0b59650e2667d",
+      "size": 1736
+    },
+    {
+      "path": "vendor/fpvdec/src/source/sample_source.hpp",
+      "sha256": "2c893ff62f31f86fa11457b34f3dd3d18267a7172bf0e7593ce8e7e8adfefd13",
+      "size": 984
+    },
+    {
+      "path": "vendor/fpvdec/src/ui/sdl_display.cpp",
+      "sha256": "2f787ea561524dabc6302e7e05b8e625fb05a1f11d2f55ee90ac02e42f26515e",
+      "size": 14718
+    },
+    {
+      "path": "vendor/fpvdec/src/ui/sdl_display.hpp",
+      "sha256": "559dcd97b21b8925aa7a5c3948001ddb861bd26757437e204c60038ba1da63ba",
+      "size": 2051
+    },
+    {
+      "path": "vendor/fpvdec/src/util/fpv_channels.hpp",
+      "sha256": "89f7f1c7ad3eda1988cdbdac49eaa9e2ac74a95f14ae3519c03a9a95bae1db13",
+      "size": 1790
+    },
+    {
+      "path": "vendor/fpvdec/src/util/spectrum.hpp",
+      "sha256": "284055523ed8a453d561a627a6d5b4fdf31619ab634c306ef00ee49ba1dd147a",
+      "size": 3026
+    },
+    {
+      "path": "vendor/fpvdec/tests/synth_fm.cpp",
+      "sha256": "418ff60bd76d0a40819de39ff7b59ed58e9099426a9f7995fa58e9faefa238ce",
+      "size": 6906
+    }
+  ],
+  "known_blockers": [
+    "Second Pi end-to-end hardware test required",
+    "Second Raspberry Pi 5 end-to-end hardware installation test required"
+  ]
+}

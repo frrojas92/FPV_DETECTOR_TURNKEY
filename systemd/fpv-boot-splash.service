@@ -1,0 +1,15 @@
+[Unit]
+Description=FPV Boot Splash V3 - hardware y mensajes de Linux
+After=local-fs.target systemd-udevd.service
+
+[Service]
+Type=oneshot
+User=cetel
+WorkingDirectory=/home/cetel/detector_drone
+Environment=HOME=/home/cetel
+Environment=FPV_SPLASH_ROTATION=0
+ExecStart=/home/cetel/detector_drone/.venv-tft/bin/python -u /home/cetel/detector_drone/fpv_boot_splash_v3.py --wait-seconds 30 --fps 0.9
+TimeoutStartSec=75
+
+[Install]
+WantedBy=multi-user.target

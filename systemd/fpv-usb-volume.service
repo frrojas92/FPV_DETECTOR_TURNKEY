@@ -1,0 +1,12 @@
+[Unit]
+Description=FPV - restaurar volumen KT USB Audio al 100 por ciento
+After=sound.target alsa-restore.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/fpv-usb-volume
+RemainAfterExit=true
+TimeoutStartSec=25
+
+[Install]
+WantedBy=multi-user.target

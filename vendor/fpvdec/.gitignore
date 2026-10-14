@@ -1,0 +1,8 @@
+build/
+build-*/
+third_party/
+*.cs8
+*.ppm
+*.bmp
+*.f32
+.DS_Store

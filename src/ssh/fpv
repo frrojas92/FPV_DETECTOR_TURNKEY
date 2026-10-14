@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Managed by FPV_SSH_UI_V1
+# Attach to the existing supervised tmux TUI without starting another HackRF.
+set -euo pipefail
+SOCKET='fpv_v19e'
+SESSION='detector'
+
+if [[ ! -t 0 || ! -t 1 ]]; then
+  printf 'La TUI requiere terminal interactiva. Conecta por SSH con TTY (ssh -t).\n' >&2
+  exit 2
+fi
+if ! command -v tmux >/dev/null 2>&1; then
+  printf 'No encuentro tmux. Instala con: sudo apt install tmux\n' >&2
+  exit 127
+fi
+if ! tmux -L "$SOCKET" has-session -t "$SESSION" 2>/dev/null; then
+  printf 'La sesion FPV aun no existe. Revisa:\n' >&2
+  printf '  systemctl status detector-fpv.service --no-pager\n' >&2
+  printf '  journalctl -u detector-fpv.service -b -n 40 --no-pager\n' >&2
+  exit 1
+fi
+exec tmux -L "$SOCKET" attach-session -t "$SESSION"

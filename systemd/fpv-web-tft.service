@@ -1,0 +1,24 @@
+[Unit]
+Description=FPV Web TFT V19-E RAMTEST V4 - streaming al ritmo de la fuente
+After=network.target
+
+[Service]
+Type=simple
+User=cetel
+Group=cetel
+WorkingDirectory=/home/cetel/detector_drone
+Environment=HOME=/home/cetel
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/home/cetel/detector_drone/.venv-tft/bin/python -u /home/cetel/detector_drone/fpv_web_v4.py --project /home/cetel/detector_drone --bind 0.0.0.0 --port 8765 --fps 30 --quality 92 --state-file /dev/shm/fpv_status.json
+Nice=5
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0077
+ProtectSystem=full
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+
+[Install]
+WantedBy=multi-user.target

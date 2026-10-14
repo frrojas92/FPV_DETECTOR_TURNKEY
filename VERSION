@@ -1,0 +1,5 @@
+v1.0.0-reference
+Tak=3.3.2
+RF=V19-E FPS30 10MSPS
+TFT=ILI9341 SPI 24000000 24-25fps observado
+Web=V4 MJPEG 30fps observado

@@ -1,0 +1,22 @@
+[Unit]
+Description=FPV TAK Sensor V3.3.2 - CoT TLS y alertas volatiles
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=cetel
+Group=cetel
+WorkingDirectory=/home/cetel/detector_drone
+ExecStart=/usr/bin/python3 -u /home/cetel/detector_drone/fpv_tak_sensor.py --config /home/cetel/detector_drone/fpv_tak_config.json
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

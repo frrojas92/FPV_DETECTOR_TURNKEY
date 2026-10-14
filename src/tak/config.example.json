@@ -1,0 +1,42 @@
+{
+  "uid": "FPV-RF-REEMPLAZAR-CON-UUID-UNICO",
+  "callsign": "FPV-RF-01",
+  "input": {
+    "state_file": "/dev/shm/fpv_status.json",
+    "poll_seconds": 0.25,
+    "max_rf_age_s": 2.5
+  },
+  "position": {
+    "mode": "auto",
+    "lat": null,
+    "lon": null,
+    "hae": null,
+    "gpsd_host": "127.0.0.1",
+    "gpsd_port": 2947,
+    "gpsd_max_age_s": 8,
+    "movement_threshold_m": 5,
+    "fallback_static": false
+  },
+  "tak": {
+    "transport": "udp",
+    "host": "127.0.0.1",
+    "port": 6969,
+    "heartbeat_s": 10,
+    "sensor_stale_s": 45,
+    "alert_repeat_s": 3,
+    "alert_stale_s": 12,
+    "geochat": false,
+    "chat_room": "All Chat Rooms",
+    "chat_cooldown_s": 30,
+    "alert_visual_ring": true,
+    "alert_visual_radius_m": 75,
+    "adversary_uas_marker": true,
+    "tls": {
+      "ca_file": "/home/cetel/detector_drone/tak_certs/ca.pem",
+      "cert_file": "/home/cetel/detector_drone/tak_certs/client.crt",
+      "key_file": "/home/cetel/detector_drone/tak_certs/client.key",
+      "server_name": null
+    },
+    "volatile_alerts": true
+  }
+}

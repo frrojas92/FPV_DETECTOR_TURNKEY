@@ -1,0 +1,80 @@
+{
+  "src/detector/fpv58_detector19e.py": {
+    "instalado": "fpv58_detector19e.py",
+    "status": "DIFERENTE",
+    "release_sha256": "ad75f15d57ecee9e34a1246ed49e5f0e99d91edb21b0bf9daffe328892db9f3b",
+    "installed_sha256": "f54ddbb734a4b5e8fd1d219e0f157da978a37e047017adab9b91cf6496ee5649"
+  },
+  "src/detector/fpv_color_transport_v182.py": {
+    "instalado": "fpv_color_transport_v182.py",
+    "status": "IGUAL",
+    "release_sha256": "89c74dd0d781ff0a221d7fb0ab4b4aa31aacca99acf093a953748b19f0a4cb5a",
+    "installed_sha256": "89c74dd0d781ff0a221d7fb0ab4b4aa31aacca99acf093a953748b19f0a4cb5a"
+  },
+  "src/detector/fpv_spectrum_v17.py": {
+    "instalado": "fpv_spectrum_v17.py",
+    "status": "IGUAL",
+    "release_sha256": "da5b2c3885727e7e8fa5efbd8d955c045826f6778abcb1a3f2d4ab48a8f6731c",
+    "installed_sha256": "da5b2c3885727e7e8fa5efbd8d955c045826f6778abcb1a3f2d4ab48a8f6731c"
+  },
+  "src/detector/fpv_video_transport_v181.py": {
+    "instalado": "fpv_video_transport_v181.py",
+    "status": "IGUAL",
+    "release_sha256": "b2af08162969cef5e5502f0d1aae1d3d6563e01f54f7faa34f4944fb13d16353",
+    "installed_sha256": "b2af08162969cef5e5502f0d1aae1d3d6563e01f54f7faa34f4944fb13d16353"
+  },
+  "src/detector/iniciar_detector_drone_v19e_ramtest.sh": {
+    "instalado": "iniciar_detector_drone_v19e_ramtest.sh",
+    "status": "IGUAL",
+    "release_sha256": "6353d289f47b185d352ed3af077b08d33d152c104e9f027fea025698e42fdf61",
+    "installed_sha256": "6353d289f47b185d352ed3af077b08d33d152c104e9f027fea025698e42fdf61"
+  },
+  "src/detector/iniciar_detector_drone_v19e_consolidado.sh": {
+    "instalado": "iniciar_detector_drone_v19e_consolidado.sh",
+    "status": "IGUAL",
+    "release_sha256": "44d5cc3ceee97175a965eb21fff1627c5295b63abe47ab810a65eea203789364",
+    "installed_sha256": "44d5cc3ceee97175a965eb21fff1627c5295b63abe47ab810a65eea203789364"
+  },
+  "src/tft/display_tft_v19e.py": {
+    "instalado": "display_tft_v19e.py",
+    "status": "IGUAL",
+    "release_sha256": "a210002dad555611ee10c3721867570cc0ae0449affeb6bdb8dca198ce557307",
+    "installed_sha256": "a210002dad555611ee10c3721867570cc0ae0449affeb6bdb8dca198ce557307"
+  },
+  "src/tft/display_tft_v19e_fps30.py": {
+    "instalado": "display_tft_v19e_fps30.py",
+    "status": "IGUAL",
+    "release_sha256": "59d6db1f2efb3c6111c3c8557b4971a7a613a7921b48451771f6aaeb97b444c1",
+    "installed_sha256": "59d6db1f2efb3c6111c3c8557b4971a7a613a7921b48451771f6aaeb97b444c1"
+  },
+  "src/web/fpv_web_v4.py": {
+    "instalado": "fpv_web_v4.py",
+    "status": "IGUAL",
+    "release_sha256": "0d6195a3c5d93a2fe4d145ed6b93804c56cae4bf3f3d7e71811c214f599670f4",
+    "installed_sha256": "0d6195a3c5d93a2fe4d145ed6b93804c56cae4bf3f3d7e71811c214f599670f4"
+  },
+  "src/splash/fpv_boot_splash_v3.py": {
+    "instalado": "fpv_boot_splash_v3.py",
+    "status": "IGUAL",
+    "release_sha256": "9c5f34c7a92f21dcc46d2eb69efd07e609866e22665ed10dc9bebd1c6dd5b233",
+    "installed_sha256": "9c5f34c7a92f21dcc46d2eb69efd07e609866e22665ed10dc9bebd1c6dd5b233"
+  },
+  "src/tak/fpv_tak_sensor.py": {
+    "instalado": "fpv_tak_sensor.py",
+    "status": "IGUAL",
+    "release_sha256": "d08899b8bf72c6354ee92b9d80ffdf4e710f65a1b7b419c16d95095e3e0e5b74",
+    "installed_sha256": "d08899b8bf72c6354ee92b9d80ffdf4e710f65a1b7b419c16d95095e3e0e5b74"
+  },
+  "src/tak/fpv_tak_tui.py": {
+    "instalado": "fpv_tak_tui.py",
+    "status": "DIFERENTE",
+    "release_sha256": "15ca4119935faf771c6bd9971c233e0f8628190368d10a1030f6f030eb9328c4",
+    "installed_sha256": "4f90d779ec35811a974cebf1cfd69fb2ea170a59d43fea44bb1d411e7be5136c"
+  },
+  "src/tak/cargar_softcert.py": {
+    "instalado": "cargar_softcert.py",
+    "status": "IGUAL",
+    "release_sha256": "7805a240fbb3b89e30ad9a9116d71a535c918cfc364e2dfa2a2437b82d986a13",
+    "installed_sha256": "7805a240fbb3b89e30ad9a9116d71a535c918cfc364e2dfa2a2437b82d986a13"
+  }
+}
