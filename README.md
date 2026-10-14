@@ -21,15 +21,17 @@ Sistema **pasivo** de detección de vídeo FPV analógico 5,8 GHz con HackRF One
 
 No se garantiza detectar/identificar drones ni su posición por RF. El símbolo OTAN de UAV se presenta por política del usuario **como hipótesis** anclada al sensor, no como posición ni afiliación verificada de aeronave.
 
-## Instalación en la RPi5 nueva
+## Inicio rápido
 
-### 1. Preparar el equipo
+### B. En una Raspberry Pi 5 nueva (Debian 13 aarch64)
+
+#### 1. Preparar el equipo
 
 Instala Debian 13 Trixie de 64 bits, crea el usuario `cetel` con acceso a `sudo` y habilita SSH y acceso a Internet para descargar el repositorio y las dependencias. Inicia sesión como `cetel`; ejecuta el instalador sin `sudo`.
 
 Con la Pi apagada, conecta la TFT ILI9341 de 2,4 pulgadas (240×320), el táctil XPT2046, un HackRF One y el adaptador KT USB Audio. Usa el [cableado conocido](docs/INSTALACION.md#cableado-conocido). GNSS es opcional. Mantén apagado el transmisor de prueba durante la calibración inicial.
 
-### 2. Descargar el Turnkey e instalar dependencias
+#### 2. Descargar el Turnkey e instalar dependencias
 
 ```bash
 sudo apt-get update
@@ -42,7 +44,7 @@ bash scripts/dependencias_debian13.sh
 
 El código se descarga en `/home/cetel/FPV_DETECTOR_TURNKEY`; el instalador creará la instalación del detector en `/home/cetel/detector_drone`. Este último directorio no debe existir antes de preparar la instalación.
 
-### 3. Habilitar SPI y comprobar el hardware
+#### 3. Habilitar SPI y comprobar el hardware
 
 ```bash
 ls -l /dev/spidev0.1
@@ -63,7 +65,7 @@ sudo reboot
 
 El script respalda `/boot/firmware/config.txt` y habilita SPI. Tras reconectar por SSH, comprueba de nuevo `/dev/spidev0.1` antes de continuar.
 
-### 4. Preparar y calibrar la pantalla
+#### 4. Preparar y calibrar la pantalla
 
 Desde un terminal SSH interactivo y con la TFT accesible:
 
@@ -85,7 +87,7 @@ python3 scripts/instalar.py --check
 
 Usa `python3 scripts/calibracion_touch_turnkey.py --manual` si T_IRQ/GPIO4 no responde. No vuelvas a ejecutar `--prepare` sobre el destino existente: el instalador solo admite instalaciones nuevas. `--activate` exige una calibración válida.
 
-### 5. Comprobar el detector y activar el arranque automático
+#### 5. Comprobar el detector y activar el arranque automático
 
 Con el transmisor de prueba apagado durante la calibración inicial:
 
@@ -136,4 +138,3 @@ Web local (sin contraseña): `http://<IP_DE_LA_PI>:8765` — **solo LAN confiabl
 - [`docs/VERIFICACION.md`](docs/VERIFICACION.md): pruebas y criterios de aceptación.
 - [`docs/SEGURIDAD.md`](docs/SEGURIDAD.md): restricciones, certificados y eventos TAK.
 - [`CHANGELOG.md`](CHANGELOG.md): historial consolidado.
-
