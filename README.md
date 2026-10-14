@@ -1,6 +1,8 @@
-# FPV DETECTOR — Release de referencia para Raspberry Pi 5
+# FPV DETECTOR — Instalación Turnkey en una Raspberry Pi 5 nueva
 
-**Versión:** `v1.0.0-reference` · **fecha:** 2026-10-14 · **estado:** fuentes Python finales integradas; requiere captura única del decodificador C++ validado para ser autónomo y una prueba en la segunda Pi para afirmar reproducibilidad de hardware.
+**Versión:** `v1.0.0-reference` · **Plataforma:** Raspberry Pi 5 de 8 GB, Debian GNU/Linux 13 Trixie de 64 bits (`aarch64`).
+
+Esta guía es exclusivamente para instalar el sistema completo en una **RPi5 nueva con sistema operativo limpio**, usuario `cetel` y sin una instalación previa en `/home/cetel/detector_drone`. El repositorio incluye las fuentes finales de `fpvdec` y el lock de Python: la instalación se realiza íntegramente en la Pi nueva, sin capturar archivos de otra unidad.
 
 Sistema **pasivo** de detección de vídeo FPV analógico 5,8 GHz con HackRF One, Raspberry Pi 5 de 8 GB, pantalla táctil ILI9341/XPT2046, audio USB, visualización web y sensor CoT/ATAK con certificados mTLS. Este repositorio **no** implementa Remote ID ni el escaneo multibanda 1,2/3,3 GHz (propuestas futuras).
 
@@ -19,51 +21,97 @@ Sistema **pasivo** de detección de vídeo FPV analógico 5,8 GHz con HackRF One
 
 No se garantiza detectar/identificar drones ni su posición por RF. El símbolo OTAN de UAV se presenta por política del usuario **como hipótesis** anclada al sensor, no como posición ni afiliación verificada de aeronave.
 
-## Inicio rápido — dos etapas
+## Instalación en la RPi5 nueva
 
-### A. UNA VEZ en la Raspberry Pi que ya funciona
+### 1. Preparar el equipo
 
-Copia el ZIP de este repositorio a `/home/cetel/`, descomprímelo y entra en la carpeta.
+Instala Debian 13 Trixie de 64 bits, crea el usuario `cetel` con acceso a `sudo` y habilita SSH y acceso a Internet para descargar el repositorio y las dependencias. Inicia sesión como `cetel`; ejecuta el instalador sin `sudo`.
+
+Con la Pi apagada, conecta la TFT ILI9341 de 2,4 pulgadas (240×320), el táctil XPT2046, un HackRF One y el adaptador KT USB Audio. Usa el [cableado conocido](docs/INSTALACION.md#cableado-conocido). GNSS es opcional. Mantén apagado el transmisor de prueba durante la calibración inicial.
+
+### 2. Descargar el Turnkey e instalar dependencias
 
 ```bash
-cd ~/FPV_DETECTOR_TURNKEY_V1_0
-bash scripts/capturar_referencia.sh
-python3 -m unittest discover -s tests -v
-python3 scripts/verificar_repo.py
+sudo apt-get update
+sudo apt-get install -y git
+cd /home/cetel
+git clone https://github.com/frrojas92/FPV_DETECTOR_TURNKEY.git
+cd /home/cetel/FPV_DETECTOR_TURNKEY
+bash scripts/dependencias_debian13.sh
 ```
 
-Eso incorpora a `vendor/fpvdec/` el **código fuente C++ FPS30 completo y modificado que ya está validado**; también crea `reference/requirements.lock.txt` y manifiestos de versiones, utilizando el `.venv-tft` del prototipo. **No** incluye certificados, llaves, IP o coordenadas privadas. Inspecciona licencias, archivos y `git diff` antes de subirlos a GitHub. Si falta la fuente C++ o la licencia, se detiene.
+El código se descarga en `/home/cetel/FPV_DETECTOR_TURNKEY`; el instalador creará la instalación del detector en `/home/cetel/detector_drone`. Este último directorio no debe existir antes de preparar la instalación.
 
-### B. En la segunda Raspberry Pi 5 (Debian 13 aarch64)
-
-Instala el sistema operativo, configura SPI, cablea la TFT y conecta HackRF y audio USB. Clona el repositorio **después** de la captura/commit de la etapa A.
+### 3. Habilitar SPI y comprobar el hardware
 
 ```bash
-cd ~/FPV_DETECTOR_TURNKEY_V1_0
-bash scripts/dependencias_debian13.sh
+ls -l /dev/spidev0.1
+id -nG
+lsusb
+aplay -l
+```
+
+Comprueba que aparecen HackRF y el audio USB, que existe `/dev/spidev0.1` y que `cetel` tiene permisos para SPI/GPIO según las reglas del sistema (incluido el grupo `spi` cuando corresponda). Tras cambiar grupos, cierra y vuelve a abrir la sesión SSH.
+
+Si `/dev/spidev0.1` no existe:
+
+```bash
+cd /home/cetel/FPV_DETECTOR_TURNKEY
+sudo bash scripts/habilitar_spi_debian13.sh
+sudo reboot
+```
+
+El script respalda `/boot/firmware/config.txt` y habilita SPI. Tras reconectar por SSH, comprueba de nuevo `/dev/spidev0.1` antes de continuar.
+
+### 4. Preparar y calibrar la pantalla
+
+Desde un terminal SSH interactivo y con la TFT accesible:
+
+```bash
+cd /home/cetel/FPV_DETECTOR_TURNKEY
 python3 scripts/instalar.py --check
 python3 scripts/instalar.py --prepare
 ```
 
-`--prepare` compila `fpvdec` desde el fuente final integrado (sin aplicar parches), instala el código y crea el entorno `.venv-tft` si no existe. Preserva la configuración TAK y registra respaldo privado de archivos sustituidos. Si faltan dependencias o el código C++ capturado, falla antes de activar servicios.
+Resuelve los avisos de `--check` antes de ejecutar `--prepare`. La preparación compila el decodificador C++ incluido, instala las fuentes finales y crea `.venv-tft` con las dependencias registradas. Al terminar inicia **automáticamente la calibración de cuatro cruces** en la TFT. Toca las cruces siguiendo las indicaciones; el resultado se guarda en `/home/cetel/detector_drone/fpv_touch_calibration.json` y pertenece únicamente a esa pantalla.
 
-Probar **manualmente** con VTX apagado durante la calibración y después con señal autorizada:
+Si falla solo la calibración, conserva la instalación preparada y vuelve a calibrar:
 
 ```bash
-cd ~/detector_drone
-./iniciar_detector_drone_v19e_consolidado.sh
-# En otra sesión SSH:
-# revisar /dev/shm/display_tft_v19e_consolidado.log
+cd /home/cetel/FPV_DETECTOR_TURNKEY
+python3 scripts/calibracion_touch_turnkey.py
+python3 scripts/instalar.py --check
 ```
 
-Con el ensayo manual detenido (`q`) y sin otro proceso HackRF:
+Usa `python3 scripts/calibracion_touch_turnkey.py --manual` si T_IRQ/GPIO4 no responde. No vuelvas a ejecutar `--prepare` sobre el destino existente: el instalador solo admite instalaciones nuevas. `--activate` exige una calibración válida.
+
+### 5. Comprobar el detector y activar el arranque automático
+
+Con el transmisor de prueba apagado durante la calibración inicial:
 
 ```bash
-cd ~/FPV_DETECTOR_TURNKEY_V1_0
+cd /home/cetel/detector_drone
+./iniciar_detector_drone_v19e_consolidado.sh
+```
+
+Después de calibrar, usa una señal de ensayo autorizada para comprobar `SCAN → RF persistente → VIDEO → SCAN`, imagen TFT, touch y audio. Puedes revisar `/dev/shm/display_tft_v19e_consolidado.log` desde otra sesión SSH. Los resultados de rendimiento del prototipo son una referencia; verifica el funcionamiento en esta nueva unidad.
+
+Detén el ensayo con `q` y comprueba que ningún otro proceso utiliza HackRF. Activa los servicios:
+
+```bash
+cd /home/cetel/FPV_DETECTOR_TURNKEY
 python3 scripts/instalar.py --activate
 ```
 
-`--activate` solicita confirmación `ACTIVAR`, respalda unidades `systemd`, retira **solo** drop-ins históricos conocidos y registra servicios finales directos, sin depender de V2/V3/V3.3 anteriores.
+Sigue la confirmación del instalador. La activación instala los servicios systemd del detector, pantalla de arranque, web, TAK y volumen USB. Comprueba el estado y reinicia para validar el arranque automático:
+
+```bash
+sudo systemctl status detector-fpv fpv-web-tft fpv-tak-sensor
+bash scripts/verificar.sh
+sudo reboot
+```
+
+Tras reconectar, vuelve a comprobar los servicios y abre `http://<IP_DE_LA_PI>:8765` desde la LAN. Para conectar con TAK, ejecuta `fpv-tak` y configura los certificados propios de la nueva unidad, servidor, callsign y posición GNSS o fija. No copies certificados ni calibraciones de otra Pi.
 
 ## Comandos de operación
 
@@ -73,7 +121,7 @@ fpv-tak                    # TUI: nombre, SoftCert --legacy, IP/DHCP, GNSS, serv
 fpv-tak-softcert ~/Auto_Cert_DS4.zip [--legacy]
 python3 ~/detector_drone/configurar_posicion_v32.py status
 sudo systemctl status detector-fpv fpv-web-tft fpv-tak-sensor
-bash scripts/verificar.sh
+bash /home/cetel/FPV_DETECTOR_TURNKEY/scripts/verificar.sh
 sudo shutdown -h now
 ```
 
@@ -88,21 +136,4 @@ Web local (sin contraseña): `http://<IP_DE_LA_PI>:8765` — **solo LAN confiabl
 - [`docs/VERIFICACION.md`](docs/VERIFICACION.md): pruebas y criterios de aceptación.
 - [`docs/SEGURIDAD.md`](docs/SEGURIDAD.md): restricciones, certificados y eventos TAK.
 - [`CHANGELOG.md`](CHANGELOG.md): historial consolidado.
-
-## Limitación explícita de este ZIP
-
-Los paquetes anteriores de la conversación contenían el módulo de inserción C++ V19-E y scripts de parcheo, **no el árbol C++ final completo** del `fpvdec` ya compilado en tu Raspberry Pi ni su entorno SDL2 específico. Por eso no se inventa ni se reconstruye silenciosamente ese código. `scripts/capturar_referencia.sh` es el único paso adicional necesario para completar la **fuente final** en Git. Una segunda instalación física todavía debe validarse; esta release es una referencia técnica consolidada, no una certificación de replicación ya realizada.
-
-<!-- TURNKEY-RC2-AUTOCALIB -->
-## Primer arranque Turnkey RC2 — Raspberry Pi 5, Debian 13 Trixie
-
-Estos son los **tres ajustes requeridos por las pruebas de instalación en hardware nuevo**:
-
-1. **SPI para XPT2046 CE1:** debe estar disponible `/dev/spidev0.1`. Con permisos de administrador, ejecutar `sudo bash scripts/habilitar_spi_debian13.sh` **solo si no existe**. El script respalda `/boot/firmware/config.txt`, habilita `dtparam=spi=on` y solicita reiniciar. Luego verificar `ls -l /dev/spidev0.1` y pertenencia al grupo `spi` (`id -nG`). No se cambia el boot automáticamente durante `--prepare` porque requiere reinicio.
-2. **Python TFT:** `--activate` admite los enlaces simbólicos normales de `python3 -m venv`, y verifica que `sys.prefix` corresponda al `.venv-tft` preparado; ya no rechaza un `bin/python` válido solo por ser un symlink.
-3. **Touch XPT2046:** al terminar exitosamente `python3 scripts/instalar.py --prepare`, se inicia **automáticamente** la calibración de cuatro cruces en la TFT, sin un segundo comando. Guarda `~/detector_drone/fpv_touch_calibration.json`. `--activate` exige calibración válida antes de iniciar servicios. El operador puede recalibrar luego con `python3 scripts/calibracion_touch_turnkey.py`, o `--manual` si T_IRQ/GPIO4 no responde.
-
-**Importante:** ejecutar `--prepare` con un terminal SSH interactivo y la TFT disponible. Si la calibración falla, la preparación permanece íntegra para diagnóstico: no borres `~/detector_drone`, vuelve a ejecutar `python3 scripts/calibracion_touch_turnkey.py` y, tras validar `--check`, ejecuta `--activate`. No se admite ejecutar `--prepare` por segunda vez sobre el destino existente.
-
-El archivo `fpv_touch_calibration.json` es propio de cada pantalla. No se incluye en Git ni en el ZIP de distribución; la calibración por defecto NO se copia del equipo original. Cuando el detector está activo, detén previamente los servicios que utilicen la TFT antes de recalibrar.
 
