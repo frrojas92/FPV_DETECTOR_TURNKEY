@@ -92,3 +92,17 @@ Web local (sin contraseña): `http://<IP_DE_LA_PI>:8765` — **solo LAN confiabl
 ## Limitación explícita de este ZIP
 
 Los paquetes anteriores de la conversación contenían el módulo de inserción C++ V19-E y scripts de parcheo, **no el árbol C++ final completo** del `fpvdec` ya compilado en tu Raspberry Pi ni su entorno SDL2 específico. Por eso no se inventa ni se reconstruye silenciosamente ese código. `scripts/capturar_referencia.sh` es el único paso adicional necesario para completar la **fuente final** en Git. Una segunda instalación física todavía debe validarse; esta release es una referencia técnica consolidada, no una certificación de replicación ya realizada.
+
+<!-- TURNKEY-RC2-AUTOCALIB -->
+## Primer arranque Turnkey RC2 — Raspberry Pi 5, Debian 13 Trixie
+
+Estos son los **tres ajustes requeridos por las pruebas de instalación en hardware nuevo**:
+
+1. **SPI para XPT2046 CE1:** debe estar disponible `/dev/spidev0.1`. Con permisos de administrador, ejecutar `sudo bash scripts/habilitar_spi_debian13.sh` **solo si no existe**. El script respalda `/boot/firmware/config.txt`, habilita `dtparam=spi=on` y solicita reiniciar. Luego verificar `ls -l /dev/spidev0.1` y pertenencia al grupo `spi` (`id -nG`). No se cambia el boot automáticamente durante `--prepare` porque requiere reinicio.
+2. **Python TFT:** `--activate` admite los enlaces simbólicos normales de `python3 -m venv`, y verifica que `sys.prefix` corresponda al `.venv-tft` preparado; ya no rechaza un `bin/python` válido solo por ser un symlink.
+3. **Touch XPT2046:** al terminar exitosamente `python3 scripts/instalar.py --prepare`, se inicia **automáticamente** la calibración de cuatro cruces en la TFT, sin un segundo comando. Guarda `~/detector_drone/fpv_touch_calibration.json`. `--activate` exige calibración válida antes de iniciar servicios. El operador puede recalibrar luego con `python3 scripts/calibracion_touch_turnkey.py`, o `--manual` si T_IRQ/GPIO4 no responde.
+
+**Importante:** ejecutar `--prepare` con un terminal SSH interactivo y la TFT disponible. Si la calibración falla, la preparación permanece íntegra para diagnóstico: no borres `~/detector_drone`, vuelve a ejecutar `python3 scripts/calibracion_touch_turnkey.py` y, tras validar `--check`, ejecuta `--activate`. No se admite ejecutar `--prepare` por segunda vez sobre el destino existente.
+
+El archivo `fpv_touch_calibration.json` es propio de cada pantalla. No se incluye en Git ni en el ZIP de distribución; la calibración por defecto NO se copia del equipo original. Cuando el detector está activo, detén previamente los servicios que utilicen la TFT antes de recalibrar.
+
