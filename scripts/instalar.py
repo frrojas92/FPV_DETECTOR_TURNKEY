@@ -236,6 +236,21 @@ def quarantine_incomplete_project(project, identity):
     return quarantine
 
 
+def post_prepare_touch():
+    """Launch four-point XPT2046 calibration after a successful preparation.
+
+    Failures leave a prepared installation for retry; never quarantine it.
+    No services are enabled/started here.
+    """
+    wizard = ROOT / "scripts/calibracion_touch_turnkey.py"
+    if wizard.is_symlink() or not wizard.is_file():
+        raise RuntimeError("Falta el asistente TOUCH RC2")
+    print("TURNKEY: iniciando calibracion TOUCH al terminar --prepare", flush=True)
+    subprocess.run([
+        sys.executable, str(wizard), "--project", str(PROJECT), "--auto"
+    ], check=True)
+
+
 def prepare():
     need_user()
     refuse_running_services()
@@ -330,6 +345,7 @@ def prepare():
                 file=sys.stderr
             )
             raise
+    post_prepare_touch()
 
 def activate():
     """Activate a fresh prepared Turnkey installation, with rollback."""
@@ -348,9 +364,31 @@ def activate():
     spi = PROJECT / "fpv_v19e_consolidado/spi_hz.txt"
     if spi.is_symlink() or not spi.is_file() or spi.read_text().strip() != "24000000":
         raise RuntimeError("Se esperaba TFT SPI 24 MHz")
-    venv = PROJECT / ".venv-tft/bin/python"
-    if venv.is_symlink() or not venv.is_file():
+    import os
+
+    venv_dir = PROJECT / ".venv-tft"
+    venv = venv_dir / "bin/python"
+
+    if not venv.is_file() or not os.access(venv, os.X_OK):
         raise RuntimeError("Entorno Python TFT ausente")
+
+    cfg = venv_dir / "pyvenv.cfg"
+    if cfg.is_symlink() or not cfg.is_file():
+        raise RuntimeError("Configuración venv TFT inválida")
+
+    result = subprocess.run(
+        [
+            str(venv),
+            "-c",
+            "import sys,pathlib; print(pathlib.Path(sys.prefix).resolve())"
+        ],
+        capture_output=True,
+        text=True,
+        check=True
+    )
+
+    if Path(result.stdout.strip()) != venv_dir.resolve():
+        raise RuntimeError("Python TFT no pertenece al venv esperado")
     if not Path("/dev/spidev0.1").exists():
         raise RuntimeError("Falta SPI CE1 /dev/spidev0.1")
 
@@ -369,6 +407,10 @@ def activate():
             except OSError:
                 pass
 
+    # Calibration is automatically performed by --prepare.
+    from calibracion_touch_turnkey import check_calibration
+    if not check_calibration(PROJECT / "fpv_touch_calibration.json"):
+        raise RuntimeError("TOUCH sin calibrar; ejecuta scripts/calibracion_touch_turnkey.py")
     answer = input("Instalar y activar los servicios FPV nuevos. Escribe ACTIVAR: ").strip()
     if answer != "ACTIVAR":
         raise RuntimeError("Cancelado sin alterar servicios")

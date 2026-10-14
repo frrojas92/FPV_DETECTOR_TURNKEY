@@ -1,5 +1,5 @@
 {
-  "release": "v1.0.0-rc1",
+  "release": "v1.0.0-rc2",
   "created": "2026-10-14",
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "314ad76d39ec55eff120683d06b14866327aea7d60326dade5fbb71759eac229",
-      "size": 5613
+      "sha256": "9f6d40479aafde5d05d90a0114ff05344f8a1ee88e1676e562cb2929778410d1",
+      "size": 7589
     },
     {
       "path": "THIRD_PARTY.md",
@@ -103,6 +103,11 @@
       "size": 13392
     },
     {
+      "path": "scripts/calibracion_touch_turnkey.py",
+      "sha256": "61ee84882c1f4abdf385fb366f099edd82a126a3507fa28d24f2e73253ee0fe2",
+      "size": 6748
+    },
+    {
       "path": "scripts/capturar_referencia.sh",
       "sha256": "94a8e79a5747ac042509b1ad209d5539866cdf87048ecf5fc1790d590773bda5",
       "size": 4125
@@ -128,9 +133,14 @@
       "size": 9200
     },
     {
+      "path": "scripts/habilitar_spi_debian13.sh",
+      "sha256": "3d94bc94cf16befe04148ed9ea29ced63153e54498fd897c0ac1ffd20915e613",
+      "size": 916
+    },
+    {
       "path": "scripts/instalar.py",
-      "sha256": "6e34300d73dd533858f7c409c433d48bf3c385c73afbe78095027bd9896c54c7",
-      "size": 15461
+      "sha256": "66b0dc536bdc0025cd3ff51c8177730af37bbfbb152f37b687f8f8038823283e",
+      "size": 16939
     },
     {
       "path": "scripts/restaurar_servicios.sh",
@@ -318,6 +328,11 @@
       "size": 6403
     },
     {
+      "path": "tests/test_calibracion_touch_turnkey.py",
+      "sha256": "6b1311374cbcf5f4ed24652a310e3eacdb780c172f30e2918c4be4bc686f8fe7",
+      "size": 3237
+    },
+    {
       "path": "tests/test_fpvdec_publicacion.py",
       "sha256": "c6709d2c4daf91bd0a4508f1c06550bcca8812bba76eaf9056d53b7759e2ce31",
       "size": 3028
@@ -336,6 +351,11 @@
       "path": "tests/test_tls.py",
       "sha256": "c4659057058e570e9176893c81f53995b36b9beb07b74e0b8b4f693b4b931f04",
       "size": 3193
+    },
+    {
+      "path": "tests/test_touch_autoinstalacion.py",
+      "sha256": "678a94cd08f0f4ead2b63d20b7360b16725a0c1544f9c26e389ae90d2bd4e126",
+      "size": 4638
     },
     {
       "path": "tests/test_transaccion.py",
